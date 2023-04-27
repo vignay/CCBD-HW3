@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: todo-app-rc
+spec:
+  replicas: 0
+  selector:
+    app: todo-app
+  template:
+    metadata:
+      labels:
+        app: todo-app
+    spec:
+      containers:
+        - name: todo-app
+          image: docker.io/adithyak243/todo-app:hw3
+          env:
+            - name: MONGO_HOST
+              value: mongodb
+            - name: MONGO_PORT
+              value: "27017"
+          ports:
+            - containerPort: 5000
